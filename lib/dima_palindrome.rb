@@ -1,23 +1,24 @@
-# frozen_string_literal: true
+require "dima_palindrome/version"
 
-require_relative "dima_palindrome/version"
-
-class String
+module DimaPalindrome
 
   # Returns true for a palindrome, false otherwise.
   def palindrome?
     processed_content == processed_content.reverse
   end
 
-  # Returns the letters in the string.
-  def letters
-    self.scan(/[a-z]/i).join.downcase
-  end
-
   private
 
     # Returns content for palindrome testing.
     def processed_content
-      scan(/[a-z]/i).join.downcase
+      self.to_s.scan(/[a-z\d]/i).join.downcase
     end
+end
+
+class String
+  include DimaPalindrome
+end
+
+class Integer
+  include DimaPalindrome
 end
